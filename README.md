@@ -26,7 +26,7 @@ There are different ways to get a package on PyPI. This guidebook assumes or use
     + [pypi-publish](https://github.com/marketplace/actions/pypi-publish) action
     + [dawidd6/action-download-artifact](https://github.com/dawidd6/action-download-artifact) in order to separate build and deployment into separate workflows.
 
-## Create accounts
+## Create accounts
 
 (Skip if you already have accounts on these services.)
 
@@ -56,7 +56,7 @@ Do this with the GitHub web UI
             - `release-testpypi`
                 - Limit to protected branches
 
-## Add GitHub Actions
+## Add GitHub workflows
 
 - Add the three GitHub workflow files to `.github/workflows/`
 
