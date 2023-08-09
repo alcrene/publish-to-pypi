@@ -138,3 +138,6 @@ When you are ready to publish a new release, do the following:
 
 - Your package is now on PyPI !
 
+## Attribution
+
+The GitHub actions are derived from examples from the [PyPI docs](https://docs.pypi.org/trusted-publishers/using-a-publisher/) (Apache-2.0) and the [PyPI publish GitHub Action](https://github.com/marketplace/actions/pypi-publish#usage) (BSD-3).
