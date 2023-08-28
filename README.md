@@ -15,9 +15,10 @@ This is **not** a tutorial on publishing to PyPI. That would be beside the point
 
 There are different ways to get a package on PyPI. This guidebook assumes or uses the following:
 
-- Versioning managed by [`setuptools-scm`](https://github.com/pypa/setuptools_scm), with [SemVer](https://semver.org/) tag names.
 - [PyPA’s `build`](https://pypa-build.readthedocs.io/en/latest/)
     + This means that only [`pyproject.toml`](https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html) projects are supported.
+- Version numbers are automatically determined by [`setuptools-scm`](https://github.com/pypa/setuptools_scm), with [SemVer](https://semver.org/) tag names.
+    + In particular, this means the `pyproject.toml` should not specify the version explicitely, but rather contain a line like `dynamic = ["version"]`.
 - [Trusted publishing](https://docs.pypi.org/trusted-publishers/using-a-publisher/) to avoid the need for API tokens.
 - GitHub, because it is currently the only Trusted Publisher.
 - [GitHub Actions](https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/)
@@ -33,7 +34,7 @@ There are different ways to get a package on PyPI. This guidebook assumes or use
 - On [TestPyPI](https://test.pypi.org)
 - On [PyPI](https://pypi.org/)
 
-## Repo configuration
+### Repo configuration
 
 Do this with the GitHub web UI
 
@@ -41,13 +42,13 @@ Do this with the GitHub web UI
     - General
         - Default branch
             - main
-    - Tags
-        - Protected tags
-            - v*
     - Branches
-        - Main
+        - Add a rule for branch `main`
             - Allow force push
                 - Only admin
+    - Tags
+        - Protected tags
+            - Add the rule `v*`
     - Environments
         - Create 2 environments
             - `release`
@@ -105,16 +106,17 @@ When you are ready to publish a new release, do the following:
 (The procedure is the same for the first or subsequent releases.)
 
 - Tag the latest commit with an RC version number: `v0.1.0-rc.1`
-  + This *must* be the latest commit.
   + Make sure to use a [SemVer](https://semver.org/) so that build tools recognize the version number.
+  + The GitHub actions will always build and publish the latest commit with a SemVer tag.
   + Versions prefixed with `v` is the most common standard, and some tools may expect it.
   + Separating numbers – like `-rc.1` – ensures that they order properly with versions like `-rc.11`.
-  + `setuptools_scm` will parse the version from the tag name and produce a nice number for the package: `0.1.0-rc1`
+  + `setuptools_scm` will parse the version from the tag name and produce a nice number for the package: `0.1.0-rc1`.
   
 - Push the tag to GitHub
 
 - Trigger the `build.yml` action manually.
-  + Alternatively, make a new release with the GitHub UI.
+  + Alternatively, make a new release with the GitHub UI.  
+    (Unfortunately, there seems to be an issue with automatically triggered builds. See below.)
   
 - If the build looks OK, trigger the `publish-on-testpypi.yml` manually from the Actions menu.
 
@@ -123,15 +125,18 @@ When you are ready to publish a new release, do the following:
 ## Publish a new official version on PyPI
 
 - Tag the latest commit with plain version number: `v0.1.0`
-  + This *must* be the latest commit.
-  + This *may* be the same commit as the latest RC version (and probably should), so the commit will have both an RC version tag and a non-RC version tag.
   + Make sure to use a [SemVer](https://semver.org/) so that build tools recognize the version number.
+  + This *must* be the latest commit with a SemVer tag.
+  + This *may* be the same commit as the latest RC version (and probably should), so the commit will have both an RC version tag and a non-RC version tag.
   + Versions prefixed with `v` is the most common standard, and some tools may expect it.
   
 - Push the tag to GitHub
 
 - Make a new release with the GitHub UI.
-  + This should trigger a new build.
+  + This should trigger a new build.  
+    (Unfortunately, for reasons I don’t understand, these build artifacts will not be found by the publish actions. These seems to only happen when the build action is automatically triggered by a release.)
+
+- WORKAROUND: Manually trigger the build action.
   
 - If the build looks OK, trigger the `publish-on-pypi.yml` manually from the Actions menu.
   + This will wait 15 minutes before starting. If during this window you realize you forgot something, you may cancel the action from the Action menu.
