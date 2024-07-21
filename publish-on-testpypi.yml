@@ -20,7 +20,7 @@ jobs:
           name: release-build
           path: dist/
           github-token: ${{ secrets.GH_PAT }}
-          run-id:
+          run-id: ${{ vars.RUN_ID_LATEST_BUILD }}
 
       - name: Display structure of downloaded files
         run: ls -R
