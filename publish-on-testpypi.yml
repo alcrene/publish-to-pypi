@@ -1,7 +1,7 @@
 # https://docs.pypi.org/trusted-publishers/using-a-publisher/
 # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
 # https://github.com/marketplace/actions/pypi-publish#non-goals
-# https://github.com/dawidd6/action-download-artifact
+# https://github.com/actions/download-artifact?tab=readme-ov-file#download-artifacts-from-other-workflow-runs-or-repositories
 
 name: Publish release on TestPyPI
 run-name: ${{ github.actor }} is publishing the latest release on TestPyPI
