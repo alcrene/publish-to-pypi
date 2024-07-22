@@ -88,10 +88,9 @@ Do this with the GitHub web UI. (These are my personal preferences; adapt as des
         - Create 2 environments
             - `release`
                 - Wait timer: 15 minutes[^why-timer]
-                - Limit to protected branches
+                    - Double check that the timer has been applied. You may need to click the text box and press Enter.
                 - Deployment branches and tags
-                    - Add deployment tag rule
-                        - `v*`
+                    - Add deployment branch rule `main`
                 - Add environment secret:
                     - Name: GH_PAT
                     - Value: [Access token code]
@@ -170,18 +169,20 @@ When you are ready to publish a new release, do the following:
   
 - Push the tag to GitHub
 
-- Trigger the `build.yml` action manually.
-  + Alternatively, make a new release with the GitHub UI.  
-    (Unfortunately, there seems to be an issue with automatically triggered builds. See below.)
+- Make a new release with the GitHub UI. This will automatically trigger the `build.yml` workflow.
+  + Alternatively, if you are not ready to mint a release, you can trigger the `build.yml` action manually.
 
 - Inspect the build output (Actions -> Build Python package -> [latest run])
-  If the build looks OK, proceed to publis on Test PyPI:
+  If the build looks OK, proceed to publish on Test PyPI:
   
   + Copy the RUN ID of the build workflow (the page you are on right now).
     It will be in the URL as `https://github.com/.../actions/runs/[RUN ID]`
-  + Open Settings -> Environments -> `release`.  
+  + Open Settings -> Environments -> `release-testpyi`.  
     Add (or update) the variable `BUILD_RUN_ID` with the value you just copied.
-  + Optionally do the same for the `release-testpypi` environment.
+  + Optionally do the same for the `release` environment.
+
+- Manually trigger the `Publish release on TestPyPI` workflow.
+  + Make sure the `BUILD_RUN_ID` environment variable points to the latest build.
 
 - Test as needed.
 
@@ -195,12 +196,18 @@ When you are ready to publish a new release, do the following:
   
 - Push the tag to GitHub
 
-- Make a new release with the GitHub UI.
+- Make a new release with the GitHub UI. This will automatically trigger the `build.yml` workflow.
 
-- Manually trigger the build action.
-  + Make sure the `BUILD_RUN_ID` environment variable points to the latest build.
+- Inspect the build output (Actions -> Build Python package -> [latest run])
+  If the build looks OK, proceed to publish on PyPI:
   
-- If the build looks OK, trigger the `publish-on-pypi.yml` manually from the Actions menu.
+  + Copy the RUN ID of the build workflow (the page you are on right now).
+    It will be in the URL as `https://github.com/.../actions/runs/[RUN ID]`
+  + Open Settings -> Environments -> `release`.  
+    Add (or update) the variable `BUILD_RUN_ID` with the value you just copied.
+
+- Manually trigger the `Publish release on PyPI` workflow.
+  + Make sure the `BUILD_RUN_ID` environment variable points to the latest build.
   + This will wait 15 minutes before starting. If during this window you realize you forgot something, you may cancel the action from the Action menu.
 
 - Your package is now on PyPI !
