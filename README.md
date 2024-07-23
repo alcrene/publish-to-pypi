@@ -95,7 +95,6 @@ Do this with the GitHub web UI. (These are my personal preferences; adapt as des
                     - Name: GH_PAT
                     - Value: [Access token code]
             - `release-testpypi`
-                - Limit to protected branches
                 - Add environment secret:
                     - Name: GH_PAT
                     - Value: [Access token code]
@@ -105,10 +104,12 @@ Do this with the GitHub web UI. (These are my personal preferences; adapt as des
 ### Add GitHub Actions
 
 - Copy the three GitHub workflow files from this repo to your project repo under `.github/workflows/`
-    + There are different ways to do this. One way is to clone the repo with [git-subrepo](https://github.com/ingydotnet/git-subrepo):
+    + There are different ways to do this. A simple way is to just download the files from this repo (either by cloning or downloading the zip). A more sophisticated way is to clone the repo with [git-subrepo](https://github.com/ingydotnet/git-subrepo):
 
           mkdir .github
           git subrepo clone https://github.com/alcrene/publish-to-pypi .github/workflows
+
+      The main advantages of using `git-subrepo` is that it allows you to update the workflows with `git subrepo pull`. You can also `git subrepo push` changes, if you use your own repository.
 
 - Edit `.github/workflows/build.yml` as needed.
     + In particular, check that the Python version is appropriate.
