@@ -4,7 +4,7 @@
 The PyPI is a godsend for Python users, placing most packages they need an easy `pip install` away.
 The process of *putting* code on PyPI however has long been much more convoluted.
 
-The good news is that the last few years have seen massive standardization efforts on the Python packaging front, meaning that for simple projects, it is now possible to devise an (almost) completely portable procedure that will work for all of them.
+The good news is that since cerca 2020–2022, we have seen the result of massive standardization efforts on the Python packaging front.[^standardization] The consequence is that for simple projects, it is now possible to devise an almost completely portable procedure that will work for all of them.
 The less good news is that with packaging tools still in a bit of flux, a lot of the information you find on the web may seem contradictory, and most of it makes the process more complicated than it now needs to be.
 
 This little resource is my attempt at collating current recommendations, as of August 2023, into the simplest possible path to PyPI publication. It provides workflow files & guidelines that I can reuse across multiple projects. My hope is that they will also be useful to you, either as⁻is or as a starting point for your own packaging adventure.
@@ -12,6 +12,8 @@ This little resource is my attempt at collating current recommendations, as of A
 This is **not** a tutorial on publishing to PyPI. That would be beside the point, since it would make this short document very much not short. Also, there are already multiple tutorials available, which are more likely to stay up to date than whatever I write here. My goal here is not for completeness, but maximum concision. If this is your first time using these tools, you will need to look up how they work separately.
 
 On the other hand, if you just want to get your package on PyPI as quickly as possible and with minimum fuss, this is the resource for you. Just copy a few files into your repo, add the project to PyPI, and you should be good to go. 
+
+[^standardization]: Those results of course are the outcome of mostly unnoticed work begun many years prior to 2020. Have a kind thought for all the people who have the vision and dedication to keep improving the Python ecosystem!
 
 ## Assumptions & tool choices
 
