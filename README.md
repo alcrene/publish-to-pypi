@@ -44,8 +44,6 @@ There are different ways to get a package on PyPI. This guidebook assumes or use
 
 This is needed for the splitting publication into separate "build" and "publish" workflows. The access token is used to allow the publish workflow to read the artifacts from the "build" workflow. See [download-artifact docs](https://github.com/actions/download-artifact?tab=readme-ov-file#download-artifacts-from-other-workflow-runs-or-repositories) and [issue discussion](https://github.com/actions/download-artifact/issues/172#issuecomment-1893955510).
 
-The suggestion below is to use a single token for PyPI publication, for simplicity. It is also possible to have separate tokens for each repo.
-
 GitHub docs:
 
 - [Configuration personal access tokens](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
@@ -63,7 +61,7 @@ What to do:
     - Permissions
         - Repository permissions
             - Actions: Read-only
-- Keep the code: you will use it twice below (once for each release environment)
+- Keep the generated token at hand: you will use it twice below (once for each release environment)
 
 ### Repo configuration
 
