@@ -29,7 +29,7 @@ There are different ways to get a package on PyPI. This guidebook assumes or use
     + Once properly configured, this allows publishing literally at the click of a button. (In contrast to e.g. `twine`, which requires issuing commands you probably forgot since the last time.)
 - Separate GitHub workflows for building and publishing.
     + [pypi-publish](https://github.com/marketplace/actions/pypi-publish) action
-    + [dawidd6/action-download-artifact](https://github.com/dawidd6/action-download-artifact) in order to separate build and deployment into separate workflows.
+    + [upload-artifact](https://github.com/actions/upload-artifact) & [download-artifact](https://github.com/actions/download-artifact) in order to separate build and deployment into separate workflows.
 
 ## Step-by-step instructions for publishing
 
